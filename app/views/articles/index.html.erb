@@ -1,2 +1,16 @@
-<h1>Articles#index</h1>
-<p>Find me in app/views/articles/index.html.erb</p>
+<div class="container">
+   
+  <% @articles.each do |article| %>
+   <%= render 'article', article: article %> 
+  
+  <% end %>
+  <%= link_to new_article_path do %>
+    <div class="float_btn">
+      <i class="fa fa-plus"></i>
+    </div>
+  <% end %>
+</div>
+
+
+    
+  
