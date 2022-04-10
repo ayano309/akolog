@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :articles, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_one :profile, dependent: :destroy
   
   delegate :birthday, :gender, to: :profile, allow_nil: true
@@ -23,5 +24,9 @@ class User < ApplicationRecord
 
   def gender
     profile&.gender
+  end
+  
+   def has_liked?(article)
+    likes.exists?(article_id: article.id)
   end
 end
