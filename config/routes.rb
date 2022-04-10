@@ -8,6 +8,11 @@ Rails.application.routes.draw do
      resources :comments, only: [:create, :destroy]
      resource :like, only: [:create, :destroy]
   end
+  resources :accounts, only: [:show] do
+    resources :follows, only: [:create]
+    resources :unfollows, only: [:create]
+  end
    resource :profile, only: [:show, :edit, :update]
+   
    
 end
