@@ -1,0 +1,33 @@
+<div class="container profilePage">
+  <div class="profilePage_user">
+    <div class="profilePage_user_image">
+      <%= image_tag 'no_image.jpeg' %>
+    </div>
+    <div class="profilePage_user_basicInfo">
+      <div class="profilePage_user_name">
+        <div class="profilePage_user_displayName">
+          <%= user.name %>
+        </div>
+        <div class="profilePage_user_actionButton">
+          <% if user == current_user %>
+            <%= link_to 'Edit', edit_profile_path %>
+          <% else %>
+            <% if current_user&.has_followed?(user) %>
+              <%= link_to 'Unfollow', account_unfollows_path(user), data: {method: 'post'} %>
+            <% else %>
+              <%= link_to 'Follow', account_follows_path(user), data: {method: 'post'} %>
+            <% end %>
+          <% end %>
+          
+        </div>
+      </div>
+      <div class="profilePage_user_introduction">
+        <%= user.profile&.introduction%>
+      </div>
+    </div>
+  </div>
+
+  <% user.articles.each do |article| %>
+    <%= render 'articles/article', article: article %>
+  <% end %>
+</div>

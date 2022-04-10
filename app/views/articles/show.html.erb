@@ -1,7 +1,9 @@
 <div class="article">
   <h1 class="article_title"><%= @article.title %></h1>
   <div class="article_detail">
-    <%= image_tag 'no_image.jpeg' %>
+    <%= link_to account_path(@article.user) do %>
+      <%= image_tag 'no_image.jpeg' %>
+    <% end %>
     <div>
       <p><%= @article.user.name %></p>
       <p><%= @article.display_created_at %></p>
