@@ -9,5 +9,8 @@ class Article < ApplicationRecord
   def display_created_at
     I18n.l(self.created_at, format: :default)
   end
-
+  
+  def has_liked?(user)
+    likes.exists?(user_id: user.id)
+  end
 end
