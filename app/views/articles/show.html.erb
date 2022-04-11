@@ -23,28 +23,14 @@
   <div class="article_content">
     <%= @article.content %>
   </div>
-  <div class="article_heart">
-    <% if user_signed_in? %>
-      <% if current_user.has_liked?(@article)%>
-        <div class="article_heart">
-          <%= link_to article_like_path(@article), data: { method: 'delete' } do %>
-            <%= image_tag 'heart-active.svg'%>
-          <% end %>
-        </div>
-      <% else %>
-        <div class="article_heart">
-          <%= link_to article_like_path(@article), data: { method: 'post' } do %>
-            <%= image_tag 'heart.svg'%>
-          <% end %>
-        </div>
-      <% end %>
-    <% end %>
+  <div id="show_like_<%= @article.id %>">
+   <%= render 'likes/like', article: @article %>
   </div>
 </div>
 <div class="container">
   <div>
     <p>コメント件数：<%= @comments.count %></p>
-    
+
     <div id="comments_area">
       <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
      <%= render 'comments/index', comments: @comments %>
@@ -56,6 +42,6 @@
       <%= render 'comments/form', {article: @article , comment: @comment} %>
     <% end %>
   </div>
-  
+
   <%= link_to "Topへ戻る", articles_path %>
 </div>

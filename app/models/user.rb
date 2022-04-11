@@ -35,9 +35,6 @@ class User < ApplicationRecord
     profile&.gender
   end
   
-   def has_liked?(user)
-    likes.exists?(user_id: user.id)
-  end
   
   def follow!(user)
     user_id = get_user_id(user)
