@@ -43,20 +43,17 @@
 </div>
 <div class="container">
   <div>
-    <p>コメント件数：<%= @article.comments.count %></p>
-    <% @article.comments.each do |comment| %>
-      <p><%= image_tag "no_image.jpeg" %></p>
-      <%= comment.user.name %>
-      <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.content %>
-      <% if comment.user == current_user %>
-        <%= link_to "削除", article_comment_path(comment.article, comment), method: :delete %>
-      <% end %>
-    <% end %>
+    <p>コメント件数：<%= @comments.count %></p>
+    
+    <div id="comments_area">
+      <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
+     <%= render 'comments/index', comments: @comments %>
+    </div>
   </div>
   <div>
-    <%= form_with model: [@article, @comment] do |f| %>
-      <%= f.text_area :content, rows: '5', placeholder: "コメントをここに" ,class: "comment_area"%>
-      <%= f.submit "送信する", class: "btn-primary" %>
+    <% if user_signed_in? %>
+      <!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
+      <%= render 'comments/form', {article: @article , comment: @comment} %>
     <% end %>
   </div>
   
