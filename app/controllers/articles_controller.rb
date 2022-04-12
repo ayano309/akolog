@@ -43,6 +43,7 @@ class ArticlesController < ApplicationController
      redirect_to articles_path, notice: 'Successfully　deleted'
   end
   
+  
   private
   def article_params
     params.require(:article).permit(:title, :content)
