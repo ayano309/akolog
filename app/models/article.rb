@@ -13,4 +13,6 @@ class Article < ApplicationRecord
   def has_liked?(user)
     likes.exists?(user_id: user.id)
   end
+  
+  
 end
